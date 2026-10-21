@@ -145,6 +145,9 @@ def main():
         i = argv.index('--rename'); rename = argv[i+1]; del argv[i:i+2]
     if '--numbered' in argv:
         argv.remove('--numbered'); numbered = True
+    drop_ipv6 = False
+    if '--drop-ipv6-variant' in argv:
+        argv.remove('--drop-ipv6-variant'); drop_ipv6 = True
     sources_file, out_plain = argv[0], argv[1]
     out_b64 = argv[2] if len(argv) > 2 else None
     sources = [l.strip() for l in open(sources_file) if l.strip() and not l.strip().startswith('#')]
@@ -167,6 +170,10 @@ def main():
             if k and k not in seen:
                 seen.add(k); merged.append(u); new += 1
         report.append(f"OK   {src} -> {len(uris)} configs, {new} new")
+    if drop_ipv6:
+        before = len(merged)
+        merged = [u for u in merged if not original_name(u).startswith('IPv6')]
+        print(f"Dropped IPv6-variant configs: {before - len(merged)}")
     if rename:
         renamed = []
         for idx, u in enumerate(merged, 1):

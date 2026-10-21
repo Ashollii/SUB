@@ -18,7 +18,7 @@ GitHub Actions runs `merge.py` every 6 hours (and whenever `sources.txt`
 changes): it fetches every source, decodes base64 payloads, extracts
 configs, drops dummy 127.0.0.1 / 0.0.0.0 info entries, removes duplicates,
 renames every config to `ASHKAN-1 <flag>`, `ASHKAN-2 <flag>`, ... — the flag is the country taken from the config's original name when it states one (otherwise 🌐) — including the `ps` name inside vmess configs,
-and commits fresh `SUB.txt` / `SUB.b64.txt` files.
+and commits fresh `SUB.txt` / `SUB.b64.txt` files. IPv6-variant configs are dropped: they do not work on typical Iranian ISPs.
 
 ## Add or remove a source
 
