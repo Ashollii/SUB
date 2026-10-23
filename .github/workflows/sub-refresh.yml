@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Merge configs
-        run: python3 merge.py sources.txt SUB.txt SUB.b64.txt --rename ASHKAN --numbered --drop-ipv6-variant
+        run: python3 merge.py sources.txt SUB.txt SUB.b64.txt --rename ASHKAN --numbered
 
       - name: Guard and commit
         run: |
@@ -37,3 +37,4 @@ jobs:
             git commit -m "Subscription refresh (GitHub Actions)"
             git push
           fi
+        fi
