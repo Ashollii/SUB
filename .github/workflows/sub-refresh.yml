@@ -1,0 +1,39 @@
+name: Refresh Subscription
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency: sub-refresh
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Merge configs
+        run: python3 merge.py sources.txt SUB.txt SUB.b64.txt --rename ASHKAN --numbered --drop-ipv6-variant
+
+      - name: Guard and commit
+        run: |
+          before=$(git show HEAD:SUB.txt | grep -c . || true)
+          after=$(grep -c . SUB.txt || true)
+          echo "configs before=$before after=$after"
+          if [ "$after" -eq 0 ] || { [ "$before" -gt 0 ] && [ $((after * 2)) -lt "$before" ]; }; then
+            echo "Guard tripped: refusing to publish a collapsed subscription."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add SUB.txt SUB.b64.txt
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Subscription refresh (GitHub Actions)"
+            git push
+          fi
