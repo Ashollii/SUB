@@ -37,4 +37,3 @@ jobs:
             git commit -m "Subscription refresh (GitHub Actions)"
             git push
           fi
-        fi
