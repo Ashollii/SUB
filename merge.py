@@ -94,7 +94,14 @@ def host_of(uri: str) -> str:
     return rest.rsplit(':',1)[0] if ':' in rest else rest
 
 def is_dummy(uri: str) -> bool:
-    return host_of(uri) in ('127.0.0.1','0.0.0.0','localhost','::1')
+    host = host_of(uri)
+    if host == '127.0.0.1':
+        # Placeholder-address configs (EdgeOne/snip style) carry the real
+        # endpoint in the host/sni params; Ashkan asked to let those in
+        # (2026-10-23). A bare 127.0.0.1 with no override stays dummy.
+        q = uri.split('?', 1)[1].split('#', 1)[0] if '?' in uri else ''
+        return not ('host=' in q or 'sni=' in q)
+    return host in ('0.0.0.0', 'localhost', '::1')
 
 def ip_version(uri: str) -> str:
     """'IPv6' when the config's server address is a literal IPv6 address,
