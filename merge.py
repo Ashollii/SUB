@@ -24,11 +24,53 @@ def maybe_b64_decode(text: str) -> str:
             pass
     return text
 
+def _fetch_full(url: str, timeout: int = 30) -> bytes:
+    """Read a whole response body, resuming with HTTP Range requests
+    whenever the egress proxy truncates it mid-body. A plain read()
+    raises IncompleteRead in that case and used to zero out the whole
+    source (the sub bot then reported 0 configs)."""
+    import http.client, time as _time
+    buf = b""
+    total = None
+    last_err = None
+    for _ in range(12):
+        headers = {'User-Agent': 'Mozilla/5.0 sub-merger'}
+        if buf:
+            headers['Range'] = f'bytes={len(buf)}-'
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                status = getattr(r, 'status', 200)
+                cr = r.headers.get('Content-Range') or ''
+                if '/' in cr:
+                    try:
+                        total = int(cr.rsplit('/', 1)[1])
+                    except ValueError:
+                        pass
+                elif r.headers.get('Content-Length'):
+                    total = int(r.headers['Content-Length']) + (len(buf) if status == 206 else 0)
+                data = r.read()
+                buf = buf + data if (buf and status == 206) else data
+        except http.client.IncompleteRead as e:
+            part = e.partial or b''
+            buf = buf + part if buf else part
+            if e.expected is not None:
+                total = len(buf) + e.expected
+        except Exception as e:
+            last_err = e
+            _time.sleep(1.0)
+        if total is not None and len(buf) >= total:
+            break
+        _time.sleep(0.3)
+    if total is not None and len(buf) < total:
+        raise IOError(f'incomplete fetch: {len(buf)}/{total} bytes')
+    if not buf and last_err is not None:
+        raise last_err
+    return buf
+
 def fetch(src: str) -> str:
     if src.startswith(('http://','https://')):
-        req = urllib.request.Request(src, headers={'User-Agent':'Mozilla/5.0 sub-merger'})
-        with urllib.request.urlopen(req, timeout=30) as r:
-            return r.read().decode('utf-8','ignore')
+        return _fetch_full(src).decode('utf-8','ignore')
     with open(src, encoding='utf-8', errors='ignore') as f:
         return f.read()
 
@@ -53,6 +95,17 @@ def host_of(uri: str) -> str:
 
 def is_dummy(uri: str) -> bool:
     return host_of(uri) in ('127.0.0.1','0.0.0.0','localhost','::1')
+
+def ip_version(uri: str) -> str:
+    """'IPv6' when the config's server address is a literal IPv6 address,
+    else 'IPv4' (literal IPv4, or a domain name — domains in these lists
+    are used over IPv4). Based on the address form, not DNS."""
+    import ipaddress
+    host = host_of(uri)
+    try:
+        return 'IPv6' if ipaddress.ip_address(host).version == 6 else 'IPv4'
+    except ValueError:
+        return 'IPv6' if ':' in host else 'IPv4'
 
 def identity(uri: str) -> str:
     # dedupe key: everything before '#'
@@ -179,7 +232,7 @@ def main():
         for idx, u in enumerate(merged, 1):
             base = f"{rename}-{idx}" if numbered else rename
             fl = extract_flag(original_name(u)) or '\U0001F310'
-            renamed.append(rename_uri(u, f"{base} {fl}"))
+            renamed.append(rename_uri(u, f"{base} {fl} {ip_version(u)}"))
         merged = renamed
     with open(out_plain,'w',encoding='utf-8') as f:
         f.write('\n'.join(merged) + ('\n' if merged else ''))
