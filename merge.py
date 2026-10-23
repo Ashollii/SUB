@@ -212,6 +212,7 @@ def main():
     out_b64 = argv[2] if len(argv) > 2 else None
     sources = [l.strip() for l in open(sources_file) if l.strip() and not l.strip().startswith('#')]
     seen, merged, report = set(), [], []
+    src_of = {}
     for src in sources:
         try:
             raw = fetch(src)
@@ -228,7 +229,7 @@ def main():
                 continue
             k = identity(u)
             if k and k not in seen:
-                seen.add(k); merged.append(u); new += 1
+                seen.add(k); merged.append(u); src_of[k] = src; new += 1
         report.append(f"OK   {src} -> {len(uris)} configs, {new} new")
     if drop_ipv6:
         before = len(merged)
@@ -239,7 +240,10 @@ def main():
         for idx, u in enumerate(merged, 1):
             base = f"{rename}-{idx}" if numbered else rename
             fl = extract_flag(original_name(u)) or '\U0001F310'
-            renamed.append(rename_uri(u, f"{base} {fl} {ip_version(u)}"))
+            nm = f"{base} {fl} {ip_version(u)}"
+            if 'fragment_fingerprint' in src_of.get(identity(u), ''):
+                nm += ' F-F'
+            renamed.append(rename_uri(u, nm))
         merged = renamed
     with open(out_plain,'w',encoding='utf-8') as f:
         f.write('\n'.join(merged) + ('\n' if merged else ''))
