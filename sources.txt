@@ -1,3 +1,4 @@
 https://sub.plenix.cyou
 https://raw.githubusercontent.com/inaz266/In-az-26/refs/heads/main/filtee.txt
 https://raw.githubusercontent.com/ThomasJasperthecat/sub/main/sublist1.txt
+https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt
