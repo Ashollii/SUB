@@ -204,14 +204,14 @@ def rename_uri(uri: str, name: str) -> str:
 #   profile-update-interval-> auto-update interval in hours
 #   subscription-userinfo  -> usage display (0 = unlimited / no expiry)
 #   support-url            -> support button (Telegram plane icon -> his chat)
-#   profile-web-page-url   -> info (i) button -> his Nerkh site
+#   profile-web-page-url   -> info (i) button -> the SUB repo page
 # Added 2026-10-24 at Ashkan's request (Patterniha-style sub header).
 SUB_HEADERS = [
     '#profile-title: ASHKAN',
     '#profile-update-interval: 1',
     '#subscription-userinfo: upload=0; download=0; total=0; expire=0',
     '#support-url: https://t.me/A5HKANI',
-    '#profile-web-page-url: https://ashollii.github.io/Nerkh/',
+    '#profile-web-page-url: https://github.com/Ashollii/SUB',
 ]
 
 
