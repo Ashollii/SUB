@@ -198,6 +198,23 @@ def rename_uri(uri: str, name: str) -> str:
     base = uri.split('#',1)[0]
     return base + '#' + urllib.parse.quote(name, safe='')
 
+# Subscription meta headers: comment lines many clients (v2rayNG, Streisand,
+# NekoBox, Hiddify...) parse from the subscription body itself.
+#   profile-title          -> subscription display name
+#   profile-update-interval-> auto-update interval in hours
+#   subscription-userinfo  -> usage display (0 = unlimited / no expiry)
+#   support-url            -> support button (Telegram plane icon -> his chat)
+#   profile-web-page-url   -> info (i) button -> his Nerkh site
+# Added 2026-10-24 at Ashkan's request (Patterniha-style sub header).
+SUB_HEADERS = [
+    '#profile-title: ASHKAN',
+    '#profile-update-interval: 1',
+    '#subscription-userinfo: upload=0; download=0; total=0; expire=0',
+    '#support-url: https://t.me/A5HKANI',
+    '#profile-web-page-url: https://ashollii.github.io/Nerkh/',
+]
+
+
 def main():
     argv = sys.argv[1:]
     rename = None; numbered = False
@@ -245,11 +262,12 @@ def main():
                 nm += ' F-F'
             renamed.append(rename_uri(u, nm))
         merged = renamed
+    body = '\n'.join(SUB_HEADERS + merged)
     with open(out_plain,'w',encoding='utf-8') as f:
-        f.write('\n'.join(merged) + ('\n' if merged else ''))
+        f.write(body + ('\n' if merged else ''))
     if out_b64:
         with open(out_b64,'w',encoding='utf-8') as f:
-            f.write(base64.b64encode(('\n'.join(merged)).encode()).decode())
+            f.write(base64.b64encode(body.encode()).decode())
     print('\n'.join(report))
     print(f"TOTAL unique configs: {len(merged)}")
 
