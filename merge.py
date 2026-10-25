@@ -125,8 +125,8 @@ def stable_key(uri: str) -> str:
     base64 payload's "ps") and ssr (the remarks param), so a config in
     the previously published SUB — where every entry carries an ASHKAN
     name — would never match the same config freshly read from a
-    source. stable_key strips the name so survival across publishes
-    can be recognised. Used for the survivor sort and the blacklist.
+    source. stable_key strips the name so the same config can be
+    recognised under either name. Used for the blacklist.
     """
     import hashlib, json as _json
     proto = uri.split('://', 1)[0].lower() if '://' in uri else ''
@@ -266,25 +266,7 @@ def main():
     sources_file, out_plain = argv[0], argv[1]
     out_b64 = argv[2] if len(argv) > 2 else None
     sources = [l.strip() for l in open(sources_file) if l.strip() and not l.strip().startswith('#')]
-    # Survivor memory (owner-approved 2026-10-25): the output file from
-    # the previous run still sits at out_plain when a merge starts (the
-    # checkout / the bot's mirror both keep the last published SUB), so
-    # configs recognised there are "survivors" and get sorted first,
-    # keeping their previous relative order — long-lived configs rise
-    # and stay numbered stably, one-cycle churn sinks to the bottom and
-    # drops out on its own. No state file is needed, so the GitHub
-    # workflow and the bot's local merge behave identically.
     import os as _os
-    prev_order = {}
-    if _os.path.exists(out_plain):
-        try:
-            for _i, _ln in enumerate(open(out_plain, encoding='utf-8',
-                                          errors='ignore')):
-                _ln = _ln.strip()
-                if _ln and not _ln.startswith('#'):
-                    prev_order.setdefault(stable_key(_ln), _i)
-        except Exception:
-            prev_order = {}
     # Optional permanent blacklist: one config per line in blacklist.txt
     # next to the sources file (matched name-insensitively). Absent
     # file = no-op. Entries are added by hand when the owner names a
@@ -326,15 +308,6 @@ def main():
         before = len(merged)
         merged = [u for u in merged if not original_name(u).startswith('IPv6')]
         print(f"Dropped IPv6-variant configs: {before - len(merged)}")
-    if prev_order:
-        _keys = [stable_key(u) for u in merged]
-        _idx = sorted(range(len(merged)),
-                      key=lambda i: (0, prev_order[_keys[i]])
-                      if _keys[i] in prev_order else (1, i))
-        merged = [merged[i] for i in _idx]
-        _surv = sum(1 for k in _keys if k in prev_order)
-        print(f"Survivor sort: {_surv}/{len(merged)} configs kept from "
-              f"the previous publish and moved first")
     if rename:
         renamed = []
         for idx, u in enumerate(merged, 1):
