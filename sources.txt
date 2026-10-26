@@ -5,3 +5,7 @@ https://raw.githubusercontent.com/patterniha/Free-Configs/main/configs.txt
 https://raw.githubusercontent.com/SeyedNG/proxy/refs/heads/main/configs/proxy_configs_tested.txt#vpn
 https://raw.githubusercontent.com/SeyedNG/proxy/refs/heads/main/configs/fragment_fingerprint.txt#vpn
 https://raw.githubusercontent.com/Ashollii/SUB/main/harvest.txt
+https://sub.shadowproxy66.workers.dev/sub/736218dc-3cdf-4e93-bb5b-1d726418e43e
+https://sub.shadowproxy66.workers.dev/sub/e298329f-2274-4b24-8d7c-84183c77dba8
+https://sub.shadowproxy66.workers.dev/sub/e7c122fa-35f6-4962-9ff4-70ab55e6fbac
+https://kral.shadowproxy66.cc.cd
