@@ -109,16 +109,6 @@ trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@216.152.147.93:443?security=tls&sni=co
 vless://7d77e8fc-07d9-46e3-bf70-66531011fed3@2.56.127.202:17101?security=reality&encryption=none&pbk=td00T39muH83FZFqpyfgfYYQLjT860DLdrCcnKr2_FE&fp=firefox&type=grpc&sni=it.nvidia.com&sid=b08ccd#@ConfigYab_FREE
 vless://a8b2acc4-9b83-4307-aa29-a54ed7abab5a@3.67.184.216:1002?security=none&encryption=none&headerType=none&type=tcp#@ConfigYab_FREE
 vless://40cc9b52-25b8-4cd5-8b45-715ae26e6baf@sc-thenetherlands1.09vpn.com:80?path=/vless/&security=none&encryption=none&host=sc-thenetherlands1.09vpn.com&type=ws#@ConfigYab_FREE
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjNThkMTZlNTkzZDQ0ZjQy@158.173.221.214:11001#%40v2FreeHub%20%F0%9F%87%AC%F0%9F%87%A7
-ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0@82.110.60.9:19999#%40v2FreeHub%20%F0%9F%87%A6%F0%9F%87%B9
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozc3N1bWYy@142.4.216.225:443#Canada%20%F0%9F%87%A8%F0%9F%87%A6
-ss://YWVzLTI1Ni1nY206OGMwMDliYjYtMDhiMy00NTI2LWE4NmItNWFmN2RkZmM1NjdhLTRjNzU3YjcyLTZlZWMtNGZhZi04YzJlLTA5ZmQxYzdmYTkzNg@192.3.247.109:43579#United%20States%20%F0%9F%87%BA%F0%9F%87%B8
-ss://YWVzLTI1Ni1nY206ODFhMjA0MjkxNjVkZjg3ZQ@195.133.23.200:50111#Russia%20%F0%9F%87%B7%F0%9F%87%BA
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpEZGhyQnZFWDJkSFJqYWFrV0hCWlVh@20.111.9.76:59380#France%20%F0%9F%87%AB%F0%9F%87%B7
-ss://YWVzLTI1Ni1nY206YmRiMzEzYWRmNzRjMmVkZQ@46.17.40.234:50111#Russia%20%F0%9F%87%B7%F0%9F%87%BA
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNR0ppWg@130.49.176.26:1443#The%20Netherlands%20%F0%9F%87%B3%F0%9F%87%B1
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNR0ppWg@130.49.176.26:8139#The%20Netherlands%20%F0%9F%87%B3%F0%9F%87%B1
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNR0ppWg@130.49.176.26:8388#The%20Netherlands%20%F0%9F%87%B3%F0%9F%87%B1
 vless://f0642f28-5d35-43b0-8812-f009bb10526b@130.49.218.109:2053?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=fr1.safesurf.cloud&fp=firefox&pbk=is-adFTo7Tnhg-ZEyVveDkI7AV6Nc26LXrgxiDRSRzg&sid=c33faad92185d74d#%E2%98%95FreeCoffee%20%F0%9F%87%AB%F0%9F%87%B7
 vless://f0642f28-5d35-43b0-8812-f009bb10526b@de2.safesurf.cloud:2053?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=de2.safesurf.cloud&fp=firefox&pbk=2UKg1hGI_WI4L0BRsBwGvep7GxRovzs97mX3YeqTzno&sid=aee544f61bc356f1#%E2%98%95FreeCoffee%20%F0%9F%87%A9%F0%9F%87%AA
 vless://31e407b3-6e1e-425f-98ea-fcf8f494c6a0@edge9.cdnguard.org:443?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=edge9.cdnguard.org&fp=qq&pbk=Ords51JNoMCICcXCPQZB1jFomc6F_NJOGaWlzwOQdSQ&sid=e01dac1e58b01023#%E2%98%95FreeCoffee%20%F0%9F%87%B3%F0%9F%87%B1
