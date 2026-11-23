@@ -19,7 +19,6 @@ vless://920b3cd9-4f82-4669-bbd2-d4a28b9052c6@132.243.242.40:9543?encryption=none
 ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0=@45.86.51.18:19999#%F0%9F%8C%9F%20%40MTproxy22_v2ray
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@216.152.155.176:443?security=tls&sni=blog.nextjobopportunityandclaimyouridealrole.com#%F0%9F%87%BA%F0%9F%87%B8%20%40NamiraConfigs
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@216.152.155.59:443?security=tls&sni=api.nextjobopportunityandclaimyouridealrole.com#%F0%9F%87%BA%F0%9F%87%B8%20%40NamiraConfigs
-vless://By-BlackRay-Channel@blackshdow.com:443?security=reality&encryption=none&pbk=DHhDwTmyUJETVMQUC3xCUK2yApgnRMsyOUK8oVUceRY&headerType=none&fp=chrome&spx=%2FV921qzhUus0LBGK&type=tcp&sni=nl.wordpress.org&sid=21439457#%40Moris_proxy
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjNThkMTZlNTkzZDQ0ZjQy@158.173.221.214:11001#%40v2FreeHub%20%F0%9F%87%AC%F0%9F%87%A7
 ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0@185.164.175.81:19999#%40v2FreeHub%20%F0%9F%87%AE%F0%9F%87%B9
 ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0@82.110.60.9:19999#%40v2FreeHub%20%F0%9F%87%A6%F0%9F%87%B9
